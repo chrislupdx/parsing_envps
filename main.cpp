@@ -21,16 +21,15 @@ int main(int argc, char **argv, char **envp)
     insert(list,envp[idx],position,used);        // Insert new value at position 'position'
   }
 
-
   // Display the list
   cout << "\n\nOrdered List Of Environment Variables: " << endl;
   print(list,used);
 
   // Remove an element and display
   cout << "Enter valid element number to remove: ";
-  // cin >> position;
-  // remove(list,position,used);
-  // print(list,used);
+   cin >> position;
+   remove(list,position,used);
+   print(list,used);
 
   return 0;
 }
@@ -38,6 +37,13 @@ int main(int argc, char **argv, char **envp)
 // Remove element as position pos
 void remove(char list[][max_length], int pos, int & size) 
 {
+  cout << "requested delete is line " << pos << " - " << list[pos] << endl;
+  //start at the targetd position and shift everything over on top of it
+  for (int idx = pos; idx < size; idx++)
+  {
+   strcpy(list[idx], list[idx + 1]);
+  }
+
 }
 
 // Print the ordered list
@@ -59,8 +65,7 @@ void insert(char list[][max_length], char * new_val, int pos, int & size)
       strcpy(list[idx],list[idx - 1]); //shift everything by one (dstination, source)
     }
   
-  strcpy(list[pos], new_val);
-
-    size++; //double check where the increment needs to be positioned
+  strcpy(list[pos], new_val);   //insert the new value at the newly opened position
+  size++; //double check where the increment needs to be positioned
   }
 }
